@@ -15,7 +15,7 @@ import retrofit.RetrofitError;
  * Created by martin on 3/28/2015.
  */
 public class StockResolver extends AsyncTask<String, Void, StockModel> {
-    private static final String RESOLVER_URL = "http://10.0.0.5:5000";
+    private static final String RESOLVER_URL = "http://hero.matan.me:8080";
     public static StockModel resolveStock(String stock_id) {
         RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint(RESOLVER_URL).build();
         StockApi stockApi = restAdapter.create(StockApi.class);
@@ -29,7 +29,7 @@ public class StockResolver extends AsyncTask<String, Void, StockModel> {
             Log.e("Error!", "Exception caught fetching my stock!");
             e.printStackTrace();
         }
-        return null;
+        return new StockModel();
     }
 
     @Override

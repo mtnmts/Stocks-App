@@ -40,31 +40,32 @@ public class home_activity extends ActionBarActivity implements AdapterView.OnIt
     }
 
     private void updateIsinList() {
+
         SharedPreferences s = getPreferences(0);
         Set<String> trackers = s.getStringSet(globals.ISIN_TRACKLIST_PERF_KEY, new HashSet<String>());
         final ListView lv = (ListView)findViewById(R.id.isin_list);
         Log.d("Debug", "Clearing ISIN's list");
-        List<AsyncTask<String, Void, StockModel>> sl = new ArrayList<AsyncTask<String, Void, StockModel>>();
-        List<StockModel> sll = new ArrayList<StockModel>();
+        //List<AsyncTask<String, Void, StockModel>> sl = new ArrayList<AsyncTask<String, Void, StockModel>>();
+        //List<StockModel> sll = new ArrayList<StockModel>();
 
-        StockResolver sr = new StockResolver();
+        //        StockResolver sr = new StockResolver();
 
-        for(String st : trackers) {
-            sl.add(sr.execute(st));
-        }
+        //for(String st : trackers) {
+        //   sl.add(sr.execute(st));
+        //}
         // Bad! this should all be one request
-        for(AsyncTask<String, Void, StockModel> sm : sl) {
-            try {
-                sll.add(sm.get());
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            }
-        }
+//        for(AsyncTask<String, Void, StockModel> sm : sl) {
+//            try {
+//                sll.add(sm.get());
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            } catch (ExecutionException e) {
+//                e.printStackTrace();
+//            }
+//        }
 
-        ArrayAdapter<StockModel> itemsAdapter =
-            new ArrayAdapter<StockModel>(getApplicationContext(), android.R.layout.simple_list_item_1, sll);
+        ArrayAdapter<String> itemsAdapter =
+            new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, new ArrayList<String>(trackers));
         lv.setAdapter(itemsAdapter);
         Log.d("Debug", "ISIN list refreshed with " + Integer.toString(trackers.size()) + " items");
     }
