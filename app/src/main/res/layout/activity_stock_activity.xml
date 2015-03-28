@@ -1,0 +1,99 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="me.matan.stocks.stock_activity"
+    android:id="@+id/stock_activity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/stock_name_text"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:visibility="visible" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ISIN"
+        android:id="@+id/label_isin"
+        android:textSize="20dp"
+        android:layout_below="@+id/stock_name_text"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="31dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Price"
+        android:id="@+id/label_price"
+        android:textSize="20dp"
+        android:layout_alignTop="@+id/label_isin"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ticker"
+        android:id="@+id/label_ticker"
+        android:textSize="20dp"
+        android:layout_below="@+id/isin_text"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="34dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/isin_text"
+        android:layout_below="@+id/label_isin"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:backgroundTint="@color/accent_material_light"
+        android:minWidth="150dp"
+        android:textSize="14dp"
+        android:textColor="#2e507e"
+        android:textIsSelectable="false"
+        android:textStyle="bold"
+        android:layout_toLeftOf="@+id/label_price"
+        android:layout_toStartOf="@+id/label_price" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/price_text"
+        android:layout_below="@+id/label_price"
+        android:layout_alignLeft="@+id/label_price"
+        android:layout_alignStart="@+id/label_price"
+        android:backgroundTint="@color/accent_material_light"
+        android:minWidth="150dp"
+        android:textSize="14dp"
+        android:textColor="#2e507e"
+        android:textIsSelectable="false"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/ticker_text"
+        android:layout_below="@+id/label_ticker"
+        android:backgroundTint="@color/accent_material_light"
+        android:minWidth="150dp"
+        android:layout_toRightOf="@+id/stock_name_text"
+        android:textSize="14dp"
+        android:textColor="#2e507e"
+        android:textIsSelectable="false"
+        android:textStyle="bold"
+        android:layout_toLeftOf="@+id/price_text"
+        android:layout_toStartOf="@+id/price_text" />
+
+</RelativeLayout>
