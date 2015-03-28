@@ -41,6 +41,9 @@ public class StockModel {
     public void setTicker(String ticker) {
         this.ticker = ticker;
     }
+    public String toString() {
+        return ticker;
+    }
 
     public StockModel(){};
 

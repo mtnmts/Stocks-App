@@ -3,6 +3,7 @@ package me.matan.stocks;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Vibrator;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -21,7 +22,9 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.concurrent.ExecutionException;
 
 import me.matan.stocks.globals;
 
@@ -41,8 +44,27 @@ public class home_activity extends ActionBarActivity implements AdapterView.OnIt
         Set<String> trackers = s.getStringSet(globals.ISIN_TRACKLIST_PERF_KEY, new HashSet<String>());
         final ListView lv = (ListView)findViewById(R.id.isin_list);
         Log.d("Debug", "Clearing ISIN's list");
-        ArrayAdapter<String> itemsAdapter =
-            new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, new ArrayList<String>(trackers));
+        List<AsyncTask<String, Void, StockModel>> sl = new ArrayList<AsyncTask<String, Void, StockModel>>();
+        List<StockModel> sll = new ArrayList<StockModel>();
+
+        StockResolver sr = new StockResolver();
+
+        for(String st : trackers) {
+            sl.add(sr.execute(st));
+        }
+        // Bad! this should all be one request
+        for(AsyncTask<String, Void, StockModel> sm : sl) {
+            try {
+                sll.add(sm.get());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+        }
+
+        ArrayAdapter<StockModel> itemsAdapter =
+            new ArrayAdapter<StockModel>(getApplicationContext(), android.R.layout.simple_list_item_1, sll);
         lv.setAdapter(itemsAdapter);
         Log.d("Debug", "ISIN list refreshed with " + Integer.toString(trackers.size()) + " items");
     }
